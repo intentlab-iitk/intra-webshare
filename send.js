@@ -1,7 +1,22 @@
-function get_local_ip() {
-    const local_ip = "172.20.X.X";
-    document.write(local_ip);
-    console.log(`Found device IP: ${local_ip}`);
+const os = require('os');
+
+function getLocalIP() {
+    const networkInterfaces = os.networkInterfaces();
+    let ipAddr = '';
+    for (const interfaceName in networkInterfaces) {
+        const networkInterface = networkInterfaces[interfaceName];
+        for (const alias of networkInterface) {
+            if (alias.family === 'IPv4' && !alias.internal) {
+                ipAddr = alias.address;
+                break;
+            }
+        }
+        if (ipAddr) {
+            break;
+        }
+    }
+    // document.write(ipAddr)
+    return ipAddr;
 }
 
-get_local_ip()
+console.log('Your IP Address is:', getLocalIP());
