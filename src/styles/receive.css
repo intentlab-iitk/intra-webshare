@@ -12,8 +12,18 @@ body {
 }
 
 button {
-    display: block;
+    display: flex;
     margin: 20px;
     padding: 10px 20px;
     font-size: 16px;
 }
+
+input {
+    text-align: center;
+}
+
+#receiveButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
