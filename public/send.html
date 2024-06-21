@@ -10,8 +10,18 @@
 </head>
 
 <body>
-  <p>Your IP Address: <span id="ipAddr"></span></p>
-  <script src="../src/js/server.js"></script>
+  <div class="container">
+    <div id="fileBox">
+      <input type="file" id="file-input">
+    </div>
+    <div>
+      <button id="sendButton">upload file</button>
+    </div>
+  </div>
+  <div id="ipDisplay">
+    <p>Your IP Address: <span id="ipAddr"></span></p>
+  </div>
+  <script src="../src/scripts/send.js"></script>
 </body>
 
 </html>

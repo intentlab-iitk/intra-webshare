@@ -10,14 +10,18 @@
 </head>
 
 <body>
-  <div>
+  <div class="container">
     <div>
-      <input type="text" placeholder="Enter Target IP" required />
+      <input type="text" id="boxSenderIP" placeholder="Enter Sender's IP here" required />
     </div>
-    <div id="receiveButton">
-      <button onclick="location.href='../index.html'">connect</button>
+    <div>
+      <button id="receiveButton">Receive</button>
+    </div>
+    <div id="responseDisplay">
+      Waiting for data ...
     </div>
   </div>
+  <script src="../src/scripts/receive.js"></script>
 </body>
 
 </html>
