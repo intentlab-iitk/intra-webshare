@@ -25,7 +25,6 @@ function getClientIP(req) {
     }
 }
 
-// Sender code
 app.post('/upload', upload.single('file'), (req, res) => {
     const clientIP = getClientIP(req);
     const file = req.file;
