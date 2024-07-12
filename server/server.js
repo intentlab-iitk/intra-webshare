@@ -11,11 +11,6 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 let fileStore = {};
 
-/**
- * Function to extract IP Address from request
- * @param {*} req 
- * @returns forwardedIps
- */
 function getClientIP(req) {
     const forwardedIps = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     if (!forwardedIps) {
@@ -30,7 +25,6 @@ function getClientIP(req) {
     }
 }
 
-// Sender code
 app.post('/upload', upload.single('file'), (req, res) => {
     const clientIP = getClientIP(req);
     const file = req.file;
