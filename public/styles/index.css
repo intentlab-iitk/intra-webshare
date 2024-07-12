@@ -1,0 +1,60 @@
+/* Button Container */
+#button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin: 50px auto;
+}
+
+/* Tagline */
+#tagline {
+    color: #fff;
+    text-align: center;
+    font-size: 28px;
+    line-height: 1.5;
+    padding: 20px;
+}
+
+/* Buttons */
+/* .custom-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    flex: 1;
+} */
+
+/* Media Query for Mobile Screens */
+@media (max-width: 600px) {
+
+    /* Container Adjustments */
+    .container {
+        padding: 0 10px;
+        /* Reduce padding for smaller screens */
+    }
+
+    /* Button Container Adjustments */
+    #button-container {
+        margin: 30px auto;
+        /* Adjust margin for centering */
+        flex-direction: column;
+        /* Stack buttons vertically */
+        gap: 20px;
+        /* Reduce gap between buttons */
+    }
+
+    /* Tagline Adjustments */
+    #tagline {
+        font-size: 24px;
+        /* Decrease font size */
+        padding: 20px 10px;
+        /* Add padding for spacing */
+    }
+
+    /* Button Adjustments */
+    .custom-btn {
+        padding: 10px 20px;
+        /* Equal padding for buttons */
+        font-size: 14px;
+        /* Decrease font size */
+    }
+}

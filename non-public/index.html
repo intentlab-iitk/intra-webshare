@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Send/Receive</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="card" id="dropZone">
+            <button id="sendBtn" class="btn send">
+                <span id="plusIcon" class="plus">+</span>
+            </button>
+            <div id="fileList" class="file-list"></div>
+            <button id="actualSendBtn" class="btn send-files">Send Files</button>
+        </div>
+        <div class="card">
+            <button id="receiveBtn" class="btn receive">
+                <span class="receive-text">Receive</span>
+            </button>
+            <input type="text" id="ipInput" placeholder="Enter IP Address" class="ip-input">
+        </div>
+    </div>
+
+    <input type="file" id="fileInput" multiple style="display: none;">
+
+    <!-- Include JSZip library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

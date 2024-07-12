@@ -1,0 +1,82 @@
+#ipDisplay {
+    display: none;
+}
+
+#dropZone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #ccc;
+    background-color: #ffffff81;
+}
+
+#dropZone.dragging {
+    border-color: #4CAF50;
+}
+
+.send {
+    color: white;
+    position: relative;
+    height: 100px;
+    width: 100px;
+}
+
+.card {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #f1d8d8;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+}
+
+.send-text {
+    display: block;
+    font-size: 1.2em;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.plus {
+    display: block;
+    font-size: 3em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    color: #4CAF50;
+}
+
+.send-files {
+    color: rgb(12, 1, 1);
+    font-size: 1em;
+    padding: 15px 30px;
+    border-radius: 25px;
+}
+
+.send-files:hover {
+    background-color: #FF784E;
+}
+
+.file-list {
+    margin-top: 20px;
+}
+
+.file-item {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remove-btn {
+    color: rgb(20, 14, 14);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
