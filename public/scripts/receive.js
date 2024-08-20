@@ -23,7 +23,9 @@ function displayResponse(message) {
 function updateUIAfterSuccess() {
     document.getElementById('boxSenderIP').style.display = 'none';
     document.getElementById('receiveButton').style.display = 'none';
-    displayResponse('File received successfully');
+    document.getElementById('responseDisplay').style.display = 'none';
+    document.getElementById('tagline').innerHTML = '<p>Received successfully!</p>';
+
 }
 
 /**

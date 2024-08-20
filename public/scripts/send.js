@@ -112,18 +112,33 @@ async function sendFiles() {
     }
 
     try {
+        // Display the sender's IP address
+        const ipAddress = '127.0.0.1'; // This is static; for real use, you'd need to fetch this from a backend service
+        document.getElementById('ipAddr').textContent = ipAddress;
+        document.getElementById('dropZone').style.display = 'none';
+        document.getElementById('ipDisplay').style.display = 'block';
+
         // Zip the files
         const file = await zipFiles();
         const blob = new Blob([file], { type: 'application/zip' });
 
-        // Testing code: send -> Download
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'myFiles.zip';
-        a.click();
-        URL.revokeObjectURL(a.href);
+        // Simulate a delay of 5 seconds before initiating the download
+        setTimeout(() => {
+            // Create a temporary link element to trigger the download
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'intrawebshare_files.zip';
+            a.click();
+            URL.revokeObjectURL(a.href);
+
+            // Display success message
+            document.getElementById('ipDisplay').style.display = 'none';
+            document.getElementById('tagline').innerHTML = '<p>Sent successfully!</p>';
+
+        }, 5000); // 5 seconds delay
 
     } catch (error) {
-        console.error('Error downloading file:', error);
+        console.error('Error sending files:', error);
     }
 }
+

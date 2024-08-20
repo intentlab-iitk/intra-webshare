@@ -65,6 +65,10 @@ main {
     z-index: 9999;
 }
 
+.navbar a {
+    text-decoration: none;
+}
+
 .logo {
     display: flex;
     align-items: center;

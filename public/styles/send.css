@@ -1,5 +1,8 @@
 #ipDisplay {
     display: none;
+    color: #fff;
+    text-align: center;
+    font-size: 25px;
 }
 
 #dropZone {
