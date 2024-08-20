@@ -2,16 +2,62 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="../src/styles/send.css">
-  <title>Intra WebShare</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Intra WebShare -->
+	<title>Intra WebShare</title>
+    <link rel="shortcut icon" href="favicon" type="image/x-icon">
+    <link rel="stylesheet" href="styles/main.css">
+	<link rel="stylesheet" href="styles/send.css">
 </head>
 
 <body>
-  <p>Your IP Address: <span id="ipAddr"></span></p>
-  <script src="../src/js/server.js"></script>
+
+	<header class="navbar">
+		<div class="logo">
+			<img src="assets/images/logo.png" alt="Logo">
+			<span id="appName">Intra WebShare</span>
+			<span id=labName>&nbsp by INTENT Labs</span>
+		</div>
+	</header>
+
+	<main>
+		<div id="particles-js"> </div>
+		<div class="container">
+			<div class="card" id="dropZone">
+				<button id="sendBtn" class="btn send">
+					<span id="plusIcon" class="plus">+</span>
+				</button>
+				<div id="fileList" class="file-list"></div>
+				<input type="file" id="fileInput" multiple style="display: none;">
+				<button id="actualSendBtn" class="custom-btn">SEND</button>
+			</div>
+			<div id="ipDisplay">
+				<p>Your IP Address: <span id="ipAddr"></span></p>
+			</div>
+			<div id="tagline">
+				<p> Intra WebShare redefines file sharing by enabling <br> effortless peer-to-peer sharing ... </p>
+			</div>
+			
+		</div>
+	</main>
+
+	<footer>
+		<div class="footer-content">
+			<p>&copy; 2024 Intra WebShare. All rights reserved.</p>
+			<ul class="footer-links">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+		</div>
+	</footer>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+	<script src="scripts/particles.js"></script>
+	<script src="scripts/main.js"></script>
+	<script src="scripts/send.js"></script>
+
 </body>
 
 </html>

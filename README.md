@@ -12,8 +12,8 @@ It is a web-based file-sharing application designed for seamless and efficient f
 ## How It Works
 
 - **Initial Connection**: Sender and receiver access Intra-WebShare through their web browsers.
-- **Send**: First sender select the files and clicks on send which then keeping sender files in sender buffer and displays the sender's IP on screen. 
-- **Receive**: Receiver has to enter sender's IP which then intiates a connection with sender and receives the file.
+- First sender selects the files and clicks on send which then keeping sender files in sender buffer and displays the sender's IP on screen. 
+- Receiver has to enter sender's IP which then intiates a connection with sender and receives the file.
 
 
 ## Future Work
@@ -21,38 +21,13 @@ It is a web-based file-sharing application designed for seamless and efficient f
 - **Decentralization**: Implementing a fully decentralized P2P file transfer system to further enhance security and efficiency.
 - **Authentication**: As of know there is no authenticity of the receiver which we will implement with a pin.
 
-## Website setup:
-
-- **Clone the repository**:
-    ```bash
-    cd /var/www
-    git clone https://github.com/yourusername/intra-webshare.git
-    cd intra-webshare
-    ```
-
-- **Set up Nginx**:
-    
-    Configure Nginx with the appropriate settings for your intranet.
-
-- **Run the application**:
-    Edit and copy intra-webshare_nginx.conf in sites-available of nginx, and create a symbolic link in sites-enabled.
-    ```bash
-    cp configs/intra-webshare_nginx.conf /etc/nginx/sites-available
-    ln /etc/nginx/sites-available /etc/nginx/sites-enabled
-    rm /etc/nginx/sites-enabled default
-    ```
-- **Start the nginx**:
-    ```bash
-    sudo nginx -t
-    sudo systemctl restart nginx
-    ```
-- **Access the application**:
-    - Open a web browser and navigate to `http://localhost`.
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contact
+## Authors
+
+- Mounika Musugu <<mounika30m@gmail.com>>
+- Aravind Potluri <<aravindswami135@gmail.com>>
 
 If you have any questions or feedback, feel free to reach out.

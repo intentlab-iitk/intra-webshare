@@ -4,18 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="../src/styles/index.css">
+    <!-- Intra WebShare -->
     <title>Intra WebShare</title>
+    <link rel="shortcut icon" href="favicon" type="image/x-icon">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/index.css">
 </head>
 
 <body>
-    <div>
-        <button onclick="location.href='send.html'">Send</button>
-    </div>
-    <div>
-        <button onclick="location.href='recieve.html'">Receive</button>
-    </div>
+
+    <header class="navbar">
+        <div class="logo">
+            <img src="assets/images/logo.png" alt="Logo">
+            <span id="appName">Intra WebShare</span>
+            <span id=labName>&nbsp by INTENT Labs</span>
+        </div>
+    </header>
+
+    <main>
+        <!-- Particle.js -->
+        <div id="particles-js"></div>
+        <!-- Main -->
+        <div class="container">
+            <div id="button-container">
+                <button id="send-btn" class="custom-btn" onclick="location.href='send.html'">Send</button>
+                <button id="receive-btn" class="custom-btn" onclick="location.href='receive.html'">Receive</button>
+            </div>
+            <div id="tagline">
+                <p> Intra WebShare redefines file sharing by enabling <br> effortless peer-to-peer sharing ... </p>
+            </div>
+        </div>
+    </main>
+
+	<footer>
+		<div class="footer-content">
+			<p>&copy; 2024 Intra WebShare. All rights reserved.</p>
+			<ul class="footer-links">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+		</div>
+	</footer>
+    
+    <script src="scripts/particles.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/index.js"></script>
+
 </body>
 
 </html>
