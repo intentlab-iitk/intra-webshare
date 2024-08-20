@@ -1,9 +1,12 @@
 #responseDisplay {
     display: none;
     text-align: center;
-    font-size: 18px;
     margin-top: 20px;
     color: #ccc;
+}
+
+#boxSenderIP {
+    text-align: center;
 }
 
 /* Input boxes styling */
@@ -21,22 +24,4 @@ input {
 
 input[type="text"]:focus {
     border-color: #2575fc;
-}
-
-/* Responsive adjustments */
-@media screen and (max-width: 600px) {
-    .container {
-        padding: 10px;
-    }
-
-    input {
-        width: 100%;
-        margin: 15px 0;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    input {
-        font-size: 14px;
-    }
 }

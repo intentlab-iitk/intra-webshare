@@ -1,66 +1,92 @@
 /*************************************************************
  * @file        : receive.js    
- * @description : This is a JavaScript file for receive.html
- *                in the public folder.
+ * @description : JavaScript file for receive.html in the public folder.
  *************************************************************/
 
+/****************************
+ * Frontend intraction code
+ ***************************/
+
 /**
- * Function to handle receive data from the server
+ * Function to display response message
+ * @param {string} message - The message to display
  */
-async function receiveData() {
-    try {
-        // Get the Target IP from the input field
-        const senderIP = document.getElementById('boxSenderIP').value.trim();
-        if (!senderIP) {
-            console.error('SenderIP is required');
-            return;
-        }
+function displayResponse(message) {
+    const responseDisplay = document.getElementById('responseDisplay');
+    responseDisplay.innerText = message;
+    responseDisplay.style.display = 'flex';
+}
 
-        // Construct the request body
-        const requestPayload = {
-            senderIP: senderIP
-        };
-
-        // Make a POST request to server to fetch data associated with Target IP
-        const response = await fetch('http://intentlab.iitk.ac.in:8080/getfile', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(requestPayload)
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        // Handle the file download
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        a.href = url;
-        a.download = 'downloaded_file';  // Optionally set a default file name
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-
-        document.getElementById('boxSenderIP').style.display = 'none';
-        document.getElementById('receiveButton').style.display = 'none';
-        document.getElementById('responseDisplay').innerText = 'File received successfully';
-        document.getElementById('responseDisplay').style.display = 'flex';
-
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        document.getElementById('responseDisplay').innerText = 'Error receiving file';
-        document.getElementById('responseDisplay').style.display = 'flex';
-    }
+/**
+ * Function to update UI after successful file download
+ */
+function updateUIAfterSuccess() {
+    document.getElementById('boxSenderIP').style.display = 'none';
+    document.getElementById('receiveButton').style.display = 'none';
+    displayResponse('File received successfully');
 }
 
 /**
  * Add event listeners once DOM content is loaded
  */
 document.addEventListener('DOMContentLoaded', () => {
-    // Add event listener to the button for receiving data
-    document.getElementById('receiveButton').addEventListener('click', receiveData);
+    const inputField = document.getElementById('boxSenderIP');
+    const receiveButton = document.getElementById('receiveButton');
+
+    // Function to handle Enter key press and trigger button click
+    function handleEnterKey(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent default action (e.g., form submission)
+            receiveButton.click(); // Trigger button click
+        }
+    }
+
+    // Attach event listeners
+    inputField.addEventListener('keypress', handleEnterKey);
+    receiveButton.addEventListener('click', receiveData);
+
+    // Focus on the input field initially
+    inputField.focus();
 });
+
+
+
+/******************
+ * Backend code
+ ******************/
+
+/**
+ * Function to handle receiving data from the server
+ */
+async function receiveData() {
+    const senderIP = document.getElementById('boxSenderIP').value.trim();
+
+    if (!isValidIP(senderIP)) {
+        return displayResponse('Invalid IP address');
+    }
+
+    try {
+        // Testing code: recevie -> create file
+        const textContent = 'hello there';
+        const blob = new Blob([textContent], { type: 'text/plain' });
+
+        // Download the received file
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'myFiles.txt';
+        document.body.appendChild(link);
+        link.click();
+        URL.revokeObjectURL(link.href);
+        document.body.removeChild(link);
+    }
+    catch (error) {
+        console.error('Error downloading file:', error);
+    }
+
+    updateUIAfterSuccess();
+}
+
+function isValidIP(ip) {
+    const ipPattern = /^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})$/;
+    return ipPattern.test(ip);
+}

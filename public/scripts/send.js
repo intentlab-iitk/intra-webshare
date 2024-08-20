@@ -1,56 +1,108 @@
-/*************************************************
+/****************************************************************
  * @file        : send.js    
- * @description : This is a JavaScript file for
- *                send.html in the public folder.
- *************************************************/
+ * @description : JavaScript for send.html in the public folder.
+ ****************************************************************/
+
+/****************************
+ * Frontend intraction code
+ ***************************/
+
+// Global variable to store selected files
+let selectedFiles = [];
 
 // Function to handle file selection
 function handleFileSelect(event) {
-    const files = event.target.files || event.dataTransfer.files;
+    const newFiles = Array.from(event.target.files || event.dataTransfer.files);
     const fileList = document.getElementById('fileList');
-    // Clear previous file items
+
+    // Append new files to the existing selectedFiles array
+    newFiles.forEach(file => {
+        if (!selectedFiles.some(f => f.name === file.name && f.size === file.size)) {
+            selectedFiles.push(file);
+        }
+    });
+
+    // Clear the file list and re-render all files
     fileList.innerHTML = '';
-
-    // Store selected files globally
-    selectedFiles = Array.from(files);
-
-    // Iterate through each selected file
     selectedFiles.forEach(file => {
         const fileItem = document.createElement('div');
         fileItem.className = 'file-item';
         fileItem.textContent = file.name;
 
-        const removeBtn = document.createElement('button');
-        removeBtn.className = 'remove-btn';
-        removeBtn.innerHTML = '&#128465;'; // Unicode for trash can icon
-        removeBtn.addEventListener('click', function () {
-            fileItem.remove();
-            removeFile(file);
-        });
-
+        const removeBtn = createRemoveButton(file, fileItem);
         fileItem.appendChild(removeBtn);
         fileList.appendChild(fileItem);
     });
 
-    // Re-enable the plus button after files are selected
-    document.getElementById('sendBtn').disabled = false;
+    // Check for overflow after updating the file list
+    checkOverflow();
 }
 
-// Function to remove a file from selection
-function removeFile(file) {
-    selectedFiles = selectedFiles.filter(f => f !== file);
+// Create a remove button for each file item
+function createRemoveButton(file, fileItem) {
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'remove-btn';
+    removeBtn.innerHTML = '&#128465;'; // Unicode for trash can icon
+    removeBtn.addEventListener('click', () => {
+        fileItem.remove();
+        selectedFiles = selectedFiles.filter(f => f !== file);
+        checkOverflow(); // Check overflow after removing an item
+    });
+    return removeBtn;
+}
+
+// Function to check for overflow and apply/remove border
+function checkOverflow() {
+    const fileList = document.getElementById('fileList');
+    if (fileList.scrollHeight > fileList.clientHeight) {
+        fileList.style.border = '1px solid #ccc';
+    } else {
+        fileList.style.border = 'none';
+    }
 }
 
 // Function to zip files
 async function zipFiles() {
     const zip = new JSZip();
-    selectedFiles.forEach(file => {
-        zip.file(file.name, file);
+    selectedFiles.forEach(file => zip.file(file.name, file));
+    return await zip.generateAsync({ type: 'blob' });
+}
+
+// Initialize event listeners
+function initializeEventListeners() {
+    document.getElementById('addBtn').addEventListener('click', () => {
+        document.getElementById('fileInput').click();
     });
 
-    const content = await zip.generateAsync({ type: 'blob' });
-    return content;
+    document.getElementById('fileInput').addEventListener('change', handleFileSelect);
+    document.getElementById('actualSendBtn').addEventListener('click', sendFiles);
+
+    const dropZone = document.getElementById('dropZone');
+    dropZone.addEventListener('dragover', event => {
+        event.preventDefault();
+        dropZone.classList.add('dragging');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragging');
+    });
+
+    dropZone.addEventListener('drop', event => {
+        event.preventDefault();
+        dropZone.classList.remove('dragging');
+        handleFileSelect(event);
+    });
+
+    // Check for overflow on window resize
+    window.addEventListener('resize', checkOverflow);
 }
+
+// Initialize the script
+initializeEventListeners();
+
+/******************
+ * Backend code
+ ******************/
 
 // Function to handle actual file sending
 async function sendFiles() {
@@ -59,77 +111,19 @@ async function sendFiles() {
         return;
     }
 
-    const file = await zipFiles();
-    if (file) {
-        const formData = new FormData();
-        formData.append('file', file);
-        try {
-            const response = await fetch('https://intentlab.iitk.ac.in:8080/upload', {
-                method: 'POST',
-                body: formData
-            });
+    try {
+        // Zip the files
+        const file = await zipFiles();
+        const blob = new Blob([file], { type: 'application/zip' });
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+        // Testing code: send -> Download
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'myFiles.zip';
+        a.click();
+        URL.revokeObjectURL(a.href);
 
-            const data = await response.json();
-            console.log(`Sender IP: ${data.ip}`);
-            document.getElementById('ipAddr').textContent = data.ip;
-            document.getElementById('ipDisplay').style.display = 'block';
-            document.getElementById('dropZone').style.display = 'none';
-            document.getElementById('tagline').style.display = 'none';
-
-            // Optionally hide ipDisplay after timeout
-            setTimeout(() => {
-                document.getElementById('ipDisplay').textContent = 'Timeout, Please start again!';
-            }, 60000);
-
-        } catch (error) {
-            console.error('Error uploading file:', error);
-            return;
-        }
+    } catch (error) {
+        console.error('Error downloading file:', error);
     }
-
-    // Optionally, you can send the zipBlob to a server here
-    // For demonstration, we'll just log the zip blob
-    console.log("File sent");
 }
-
-// Event listener for send button click
-document.getElementById('plusIcon').addEventListener('click', function () {
-    document.getElementById('fileInput').click();
-});
-
-// Event listener for file input change
-document.getElementById('fileInput').addEventListener('change', function (event) {
-    handleFileSelect(event);
-    // Do not clear the file input value to maintain selected files
-});
-
-// Event listener for actual send button click
-document.getElementById('actualSendBtn').addEventListener('click', function () {
-    sendFiles();
-});
-
-// Event listeners for drag and drop functionality
-const dropZone = document.getElementById('dropZone');
-
-dropZone.addEventListener('dragover', (event) => {
-    event.preventDefault();
-    dropZone.classList.add('dragging');
-});
-
-dropZone.addEventListener('dragleave', () => {
-    dropZone.classList.remove('dragging');
-});
-
-dropZone.addEventListener('drop', (event) => {
-    event.preventDefault();
-    dropZone.classList.remove('dragging');
-    handleFileSelect(event);
-});
-
-// Global variable to store selected files
-let selectedFiles = [];
-
