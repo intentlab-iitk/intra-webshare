@@ -1,3 +1,7 @@
+/****************
+* file: main.css
+*****************/
+
 /* START: Global */
 
 *,
@@ -29,6 +33,14 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+}
+
+.contentBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 10px;
 }
 
 /* END: Global */
@@ -108,12 +120,13 @@ main {
 
 .custom-btn:hover {
     background-color: #08aaef;
+
 }
 
 /* END: BUTTON */
 
 #tagline p {
-    margin: 25px 10px 15px 10px;
+    margin: 40px 10px 0px 10px;
     color: #fff;
     text-align: center;
     font-size: 40px;
@@ -178,7 +191,7 @@ footer {
     }
 
     #tagline p {
-        margin: 50px 10px 15px 10px;
+        /* margin: 50px 10px 15px 10px; */
         font-size: 20px;
     }
 
@@ -209,7 +222,7 @@ footer {
     }
 
     #tagline p {
-        margin: 30px 10px 15px 10px;
+        /* margin: 30px 10px 15px 10px; */
         font-size: 20px;
     }
 }
@@ -220,7 +233,18 @@ footer {
     }
 
     #tagline p {
-        margin: 35px 10px 15px 10px;
+        /* margin: 35px 10px 15px 10px; */
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-height: 700px) {
+    input {
+        font-size: 14px;
+    }
+
+    #tagline p {
+        /* margin: 35px 10px 15px 10px; */
         font-size: 20px;
     }
 }

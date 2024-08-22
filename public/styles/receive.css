@@ -1,9 +1,22 @@
+/********************
+* file: recevive.css
+*********************/
+
 #responseDisplay {
     display: none;
     text-align: center;
     margin-top: 20px;
     color: #ccc;
     font-size: 25px;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+#receiveBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 #boxSenderIP {

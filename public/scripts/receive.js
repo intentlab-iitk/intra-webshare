@@ -1,31 +1,41 @@
-/*************************************************************
+/*************************************************************************
  * @file        : receive.js    
  * @description : JavaScript file for receive.html in the public folder.
- *************************************************************/
+ *************************************************************************/
 
 /****************************
  * Frontend intraction code
  ***************************/
 
 /**
+ * Function to validate IP Address
+ * @param {IPv4}
+ */
+function isValidIP(ip) {
+    const ipPattern = /^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})$/;
+    return ipPattern.test(ip);
+}
+
+/**
  * Function to display response message
- * @param {string} message - The message to display
  */
 function displayResponse(message) {
     const responseDisplay = document.getElementById('responseDisplay');
     responseDisplay.innerText = message;
     responseDisplay.style.display = 'flex';
-}
+    responseDisplay.style.opacity = '1'; // Make sure it's fully visible
 
-/**
- * Function to update UI after successful file download
- */
-function updateUIAfterSuccess() {
-    document.getElementById('boxSenderIP').style.display = 'none';
-    document.getElementById('receiveButton').style.display = 'none';
-    document.getElementById('responseDisplay').style.display = 'none';
-    document.getElementById('tagline').innerHTML = '<p>Received successfully!</p>';
+    // Use CSS transition for a smoother fade-out effect
+    setTimeout(() => {
+        responseDisplay.style.opacity = '0';
+    }, 1500); // Wait before starting the fade-out
 
+    // Hide the element after the fade-out completes
+    responseDisplay.addEventListener('transitionend', () => {
+        if (responseDisplay.style.opacity === '0') {
+            responseDisplay.style.display = 'none';
+        }
+    }, { once: true });
 }
 
 /**
@@ -38,8 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to handle Enter key press and trigger button click
     function handleEnterKey(event) {
         if (event.key === 'Enter') {
-            event.preventDefault(); // Prevent default action (e.g., form submission)
-            receiveButton.click(); // Trigger button click
+            event.preventDefault();
+            receiveButton.click();
         }
     }
 
@@ -85,10 +95,12 @@ async function receiveData() {
         console.error('Error downloading file:', error);
     }
 
-    updateUIAfterSuccess();
+    // START: Frontend Interaction (DONT REMOVE)
+    document.getElementById('boxSenderIP').style.display = 'none';
+    document.getElementById('receiveButton').style.display = 'none';
+    document.getElementById('responseDisplay').style.display = 'none';
+    document.getElementById('tagline').innerHTML = '<p>Received successfully!</p>';
+    // END: Frontend Interaction (DONT REMOVE)
 }
 
-function isValidIP(ip) {
-    const ipPattern = /^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})$/;
-    return ipPattern.test(ip);
-}
+

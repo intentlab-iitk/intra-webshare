@@ -4,6 +4,9 @@
  *                files in the public folder.
  *************************************************************/
 
+/* 
+* Load Particle-js with given config file
+*/
 particlesJS.load('particles-js', 'assets/particles.json', function () {
     console.log('particles.js loaded');
 });

@@ -1,3 +1,7 @@
+/****************
+* file: send.css
+*****************/
+
 #ipDisplay {
     display: none;
     color: #fff;
@@ -6,7 +10,7 @@
 }
 
 #dropZone {
-    margin-top: 90px;
+    /* margin-top: 90px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -67,10 +71,10 @@
 }
 
 .file-list {
-    margin-top: 20px;
-    max-height: 100px;
+    margin: 20px 5px;
+    max-height: 120px;
     overflow-y: auto;
-    padding: 10px;
+    padding: 5px;
 }
 
 
@@ -78,7 +82,7 @@
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
-    align-items: left;
+    text-align: left;
     gap: 15px;
 }
 

@@ -1,6 +1,11 @@
+/*****************
+* file: index.css
+******************/
+
 /* Button Container */
 #button-container {
     display: flex;
+    margin: 20px 10px;
     justify-content: center;
     align-items: center;
     gap: 40px;
