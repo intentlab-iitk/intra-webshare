@@ -22,9 +22,10 @@ Below are instructions for setting up intra-webshare with nginx.
    ```
 
 -  **Set nginx config:**  
-   - Copy pre-configured conf file
+   - Copy pre-configured conf file and update php-fpm version
       ```bash
       sudo cp configs/IntraWebShare.conf /etc/nginx/sites-available
+      sudo chmod +x configs/update-phpv.sh && sudo configs/update-phpv.sh
       ```
    - Create new soft link
       ```bash
