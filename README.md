@@ -23,6 +23,10 @@ It is a web-based file-sharing application designed for seamless and efficient f
 - **Decentralization**: Implementing a fully decentralized P2P file transfer system to further enhance security and efficiency.
 - **Authentication**: As of know there is no authenticity of the receiver which we will implement with a pin.
 
+## Development setup
+
+We have nginx setup instruction for this site which can be found [here](./SETUP.md).
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
